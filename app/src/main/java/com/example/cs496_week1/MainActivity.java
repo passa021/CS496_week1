@@ -17,14 +17,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                case R.id.navigation_contact:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
+
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    //break;
+                case R.id.navigation_gallery:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
+
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //break;
+                case R.id.navigation_frag3:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment3()).commit();
+
+                    //break;
                     return true;
             }
             return false;
@@ -35,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1()).commit();
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
