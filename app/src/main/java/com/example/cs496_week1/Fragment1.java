@@ -13,9 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 //import org.json.JSONArray;
@@ -57,22 +54,31 @@ public class Fragment1 extends Fragment {
             e.printStackTrace();
         }*/
 
-        /*String jsondata = "[{\"phone_number\":\"01065634353\",\"first_name\":\"Ashton\",\"last_name\":\"Bleackly\"},\n" +
+        String jsondata = "[{\"phone_number\":\"01065634353\",\"first_name\":\"Ashton\",\"last_name\":\"Bleackly\"},\n" +
                 "{\"phone_number\":\"01029973634\",\"first_name\":\"Evered\",\"last_name\":\"Bundock\"},\n" +
                 "{\"phone_number\":\"01059910020\",\"first_name\":\"Roger\",\"last_name\":\"Braime\"},\n" +
                 "{\"phone_number\":\"01050243554\",\"first_name\":\"Carilyn\",\"last_name\":\"Wilgar\"},\n" +
                 "{\"phone_number\":\"01051735958\",\"first_name\":\"Marcel\",\"last_name\":\"Prattin\"},\n" +
                 "{\"phone_number\":\"01063952052\",\"first_name\":\"Jud\",\"last_name\":\"Anten\"}]";
 
-         */
-        String file = "phone_number.json";
-        String jsondata = null;
-        try {
-            jsondata = new String(Files.readAllBytes(Paths.get(file)));
+
+        String file = "C:/Users/samsung/madcamp/CS496_week1/app/src/main/java/com/example/cs496_week1/phone_number.json";
+        /*String jsondata = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+            String line = br.readLine();
+            StringBuilder sb = new StringBuilder();
+
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = br.readLine();
+            }
+
+            jsondata = sb.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("error",file);
-        }
+            Log.e("error","hihi1");
+        }*/
 
         JSONArray jsonArray = null;
         try {
