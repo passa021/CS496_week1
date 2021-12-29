@@ -1,11 +1,12 @@
 package com.example.cs496_week1;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.Toolbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +43,8 @@ public class Fragment2 extends Fragment {
                 R.drawable.image_20,
 
         };
+
+        //Toolbar toolbar = rootView.findViewById(R.id.toolbar);
 
         GridView gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
         ImageAdapter imageAdapter = new ImageAdapter(getActivity(), imageIDs);

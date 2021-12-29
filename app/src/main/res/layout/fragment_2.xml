@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingTop="60dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:lineSpacingExtra="8sp"
+        android:paddingLeft="25dp"
+        android:shadowColor="#CF6363"
+        android:text="@string/title_gallery"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#2B2B2B"
+        android:textStyle="bold"
+        android:typeface="normal" />
 
     <GridView
         android:id="@+id/gridViewImages"
