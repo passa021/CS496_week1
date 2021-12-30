@@ -3,11 +3,13 @@ package com.example.cs496_week1;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 //import android.widget.GridView;
 import android.widget.ImageView;
+import com.bumptech.glide.Glide;
 
 
 public class ImageAdapter extends BaseAdapter {
@@ -44,9 +46,12 @@ public class ImageAdapter extends BaseAdapter {
             Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs[position],options);
             bmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
 
+
             imageView = new ImageView(context);
+            //Glide.with(context).load(imageIDs[position]).override(500,500).into(imageView);
             imageView.setAdjustViewBounds(true);
             imageView.setImageBitmap(bmp);
+
 
             ImageClickListener imageViewClickListener = new ImageClickListener(context, imageIDs[position]);
             imageView.setOnClickListener(imageViewClickListener);

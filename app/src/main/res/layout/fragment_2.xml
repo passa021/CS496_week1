@@ -2,36 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:paddingTop="60dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:lineSpacingExtra="8sp"
-        android:paddingLeft="25dp"
-        android:shadowColor="#CF6363"
-        android:text="@string/title_gallery"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="#2B2B2B"
-        android:textStyle="bold"
-        android:typeface="normal" />
 
     <GridView
         android:id="@+id/gridViewImages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="634dp"
+        android:background="#00FFFFFF"
         android:gravity="center"
         android:horizontalSpacing="5dp"
         android:numColumns="3"
         android:paddingLeft="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="60dp"
         android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:verticalSpacing="5dp"></GridView>
+        android:verticalSpacing="5dp" />
 
 </LinearLayout>

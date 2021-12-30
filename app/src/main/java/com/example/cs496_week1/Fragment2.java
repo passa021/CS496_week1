@@ -1,12 +1,18 @@
 package com.example.cs496_week1;
 
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.Toolbar;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +20,8 @@ import android.widget.Toolbar;
  * create an instance of this fragment.
  */
 public class Fragment2 extends Fragment {
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,11 +52,11 @@ public class Fragment2 extends Fragment {
 
         };
 
-        //Toolbar toolbar = rootView.findViewById(R.id.toolbar);
 
         GridView gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
         ImageAdapter imageAdapter = new ImageAdapter(getActivity(), imageIDs);
         gridViewImages.setAdapter(imageAdapter);
+        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
 
         return rootView;
     }
