@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
+            android:name=".addContact"
+            android:exported="false" />
+        <activity
             android:name=".Contact_info"
             android:exported="false" />
         <activity
@@ -24,9 +27,7 @@
         <activity
             android:name=".ImageActivity"
             android:label="Selected Image"
-            android:parentActivityName=".Fragment2">
-        </activity>
-
+            android:parentActivityName=".Fragment2" />
     </application>
 
 </manifest>

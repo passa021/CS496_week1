@@ -1,17 +1,14 @@
 package com.example.cs496_week1;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -38,77 +35,19 @@ public class Fragment1 extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.contact_list);
         recyclerView.setHasFixedSize(true);
         ArrayList<Contact> list= new ArrayList<Contact>();
-        /*try {
-            Reader reader = new FileReader("../../../../../data/phone_number");
-            Log.v("reader", "success");
-            JSONObject jsonObj = new JSONObject();
+        DBHelper mDBHelper = new DBHelper(getActivity().getApplicationContext());
+        //mDBHelper.InsertContact("01000000000","Park","Doyun");
+        list = mDBHelper.getContacts();
 
+        rootView.findViewById(R.id.add_button).setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v) {
+                        mDBHelper.InsertContact("01000000000","Park","Doyun");
+                        //Log.v("click", "okay");
 
-
-            for (int i= 0;i<jsonArray.length();i++){
-                JSONObject jsonObject= jsonArray.getJSONObject(i);
-                String phone_number = (String) jsonObject.get("phone number");
-                list.add(phone_number);
-            }
-        } catch (FileNotFoundException | JSONException e) {
-            e.printStackTrace();
-        }*/
-
-        String jsondata = "[{\"phone_number\":\"01065634353\",\"first_name\":\"Ashton\",\"last_name\":\"Bleackly\"},\n" +
-                "{\"phone_number\":\"01029973634\",\"first_name\":\"Evered\",\"last_name\":\"Bundock\"},\n" +
-                "{\"phone_number\":\"01059910020\",\"first_name\":\"Roger\",\"last_name\":\"Braime\"},\n" +
-                "{\"phone_number\":\"01050243554\",\"first_name\":\"Carilyn\",\"last_name\":\"Wilgar\"},\n" +
-                "{\"phone_number\":\"01051735958\",\"first_name\":\"Marcel\",\"last_name\":\"Prattin\"},\n" +
-                "{\"phone_number\":\"01063952052\",\"first_name\":\"Jud\",\"last_name\":\"Anten\"}]";
-
-
-        String file = "C:/Users/samsung/madcamp/CS496_week1/app/src/main/java/com/example/cs496_week1/phone_number.json";
-        /*String jsondata = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-
-            String line = br.readLine();
-            StringBuilder sb = new StringBuilder();
-
-            while (line != null) {
-                sb.append(line).append("\n");
-                line = br.readLine();
-            }
-
-            jsondata = sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("error","hihi1");
-        }*/
-
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = new JSONArray(jsondata);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.e("error","hihi2");
-        }
-        for (int i= 0;i<jsonArray.length();i++){
-            JSONObject jsonObject= null;
-            try {
-                jsonObject = jsonArray.getJSONObject(i);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Log.e("error","hihi3");
-            }
-            Contact contact = new Contact();
-            try {
-
-
-                String phone_number = (String) jsonObject.get("phone_number");
-                String first_name = (String) jsonObject.get("first_name");
-                String last_name = (String) jsonObject.get("last_name");
-
-                contact.Setting(phone_number,first_name,last_name);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            list.add(contact);
-        }
+                    }
+                }
+        );
 
 
         SimpleTextAdapter adapter = new SimpleTextAdapter(list);
