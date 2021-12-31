@@ -7,11 +7,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DBHelper extends SQLiteOpenHelper{
+public class DBHelper extends SQLiteOpenHelper implements Serializable {
     private static final int DB_VERSion = 1;
     private static final String DB_NAME = "contact.db";
+    private static final long serialVersionUID = 1L;
 
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSion);
@@ -51,11 +53,12 @@ public class DBHelper extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery("SELECT * FROM Contact ORDER BY first_name", null);
         if (cursor.getCount()!=0){
             while(cursor.moveToNext()){
+                int id = cursor.getInt(0);
                String phone_number = cursor.getString(1);
                String first_name = cursor.getString(2);
                String last_name = cursor.getString(3);
                Contact contact = new Contact();
-               contact.Setting(phone_number,first_name,last_name);
+               contact.Setting(id, phone_number,first_name,last_name);
                contacts.add(contact);
 
             }
