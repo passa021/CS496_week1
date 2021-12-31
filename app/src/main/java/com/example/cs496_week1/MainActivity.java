@@ -23,23 +23,25 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            TextView menu_text = (TextView)findViewById(R.id.toolbartext);
+            //TextView menu_text = (TextView)findViewById(R.id.toolbartext);
             switch (item.getItemId()) {
                 case R.id.navigation_contact:
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
 
-                    menu_text.setText("Contact");
+                    //menu_text.setText("Contact");
                     return true;
                     //break;
                 case R.id.navigation_gallery:
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
+                    //Toolbar toolbar = findViewById(R.id.toolbar);
+                    //toolbar.inflateMenu(R.menu.gallery_menu);
 
-                    menu_text.setText("Gallery");
+                    //menu_text.setText("Gallery");
                     return true;
                     //break;
                 case R.id.navigation_frag3:
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment3()).commit();
-                    menu_text.setText("frag3");
+                    //menu_text.setText("frag3");
                     //break;
                     return true;
             }
@@ -52,13 +54,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         //getSupportActionBar().setCustomView(R.layout.toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1()).commit();
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
