@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/gallery_import"
-        android:title="Import"/>
+        android:title="갤러리에서 가져오기"/>
     <item
-        android:id="@+id/gallery_delete"
-        android:title="Delete"/>
+        android:id="@+id/gallery_camera"
+        android:title="카메라에서 가져오기"/>
 </menu>

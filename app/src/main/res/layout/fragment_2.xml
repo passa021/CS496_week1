@@ -24,7 +24,8 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="50dp"
-        android:verticalSpacing="5dp" />
+        android:verticalSpacing="5dp"
+        android:choiceMode="multipleChoice"/>
 
 
 </LinearLayout>

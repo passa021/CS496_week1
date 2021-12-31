@@ -26,13 +26,38 @@ public class MainActivity extends AppCompatActivity {
             //TextView menu_text = (TextView)findViewById(R.id.toolbartext);
             switch (item.getItemId()) {
                 case R.id.navigation_contact:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
+                    if (getSupportFragmentManager().findFragmentByTag("Contact") != null) {
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    } else {
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1(), "Contact").commit();
+                    }
+                    //보이는거 처리
+                    if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
+                    }
+                    if(getSupportFragmentManager().findFragmentByTag("frag3") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("frag3")).commit();
+                    }
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
 
                     //menu_text.setText("Contact");
                     return true;
                     //break;
                 case R.id.navigation_gallery:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
+                    if (getSupportFragmentManager().findFragmentByTag("Gallery") != null){
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
+                    } else {
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment2(), "Gallery").commit();
+                    }
+
+                    if(getSupportFragmentManager().findFragmentByTag("Contact") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    }
+                    if(getSupportFragmentManager().findFragmentByTag("frag3") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("frag3")).commit();
+                    }
+
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
                     //Toolbar toolbar = findViewById(R.id.toolbar);
                     //toolbar.inflateMenu(R.menu.gallery_menu);
 
@@ -40,7 +65,19 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                     //break;
                 case R.id.navigation_frag3:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment3()).commit();
+                    if (getSupportFragmentManager().findFragmentByTag("frag3") != null) {
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    } else {
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "frag3").commit();
+                    }
+                    //보이는거 처리
+                    if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
+                    }
+                    if(getSupportFragmentManager().findFragmentByTag("Contact") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    }
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment3()).commit();
                     //menu_text.setText("frag3");
                     //break;
                     return true;
@@ -60,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         //getSupportActionBar().setCustomView(R.layout.toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1(), "Contact").commit();
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
