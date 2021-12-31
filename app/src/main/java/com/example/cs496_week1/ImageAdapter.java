@@ -41,16 +41,16 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
         else {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 128;
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs[position],options);
-            bmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
+            //BitmapFactory.Options options = new BitmapFactory.Options();
+            //options.inSampleSize = 128;
+            //Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs[position],options);
+            //bmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
 
-
+            //imageView = convertView.findViewById(R.id.gridViewImages);
             imageView = new ImageView(context);
-            //Glide.with(context).load(imageIDs[position]).override(500,500).into(imageView);
+            Glide.with(context).load(imageIDs[position]).override(100,100).centerCrop().into(imageView);
             imageView.setAdjustViewBounds(true);
-            imageView.setImageBitmap(bmp);
+            //imageView.setImageBitmap(bmp);
 
 
             ImageClickListener imageViewClickListener = new ImageClickListener(context, imageIDs[position]);

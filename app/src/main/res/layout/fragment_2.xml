@@ -18,6 +18,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="60dp"
         android:paddingRight="10dp"
+        android:paddingBottom="80dp"
         android:verticalSpacing="5dp" />
 
 </LinearLayout>
