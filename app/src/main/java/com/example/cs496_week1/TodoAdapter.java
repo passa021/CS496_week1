@@ -3,6 +3,7 @@ package com.example.cs496_week1;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -52,6 +53,24 @@ public class TodoAdapter  extends RecyclerView.Adapter<TodoAdapter.ViewHolder> i
                     }
                 }
             }) ;
+            itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:{
+                            view.findViewById(R.id.delete2).setVisibility(View.VISIBLE);
+                            return true;
+                        }
+                        case MotionEvent.ACTION_UP:{
+                            view.findViewById(R.id.delete2).setVisibility(View.INVISIBLE);
+                            return false;
+                        }
+                        default:
+                            return false;
+                    }
+                }
+
+            });
 
 
         }

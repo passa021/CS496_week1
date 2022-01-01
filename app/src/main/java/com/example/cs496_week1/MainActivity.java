@@ -1,17 +1,9 @@
 package com.example.cs496_week1;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import androidx.appcompat.widget.Toolbar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -97,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = MainActivity.this;
         setContentView(R.layout.activity_main);
+        Toast myToast = Toast.makeText(this.getApplicationContext(),"You can remove data using swipe", Toast.LENGTH_SHORT);
+        myToast.show();
 
 
         //Toolbar toolbar = findViewById(R.id.toolbar);
