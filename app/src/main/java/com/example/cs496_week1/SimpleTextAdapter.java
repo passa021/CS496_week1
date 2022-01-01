@@ -6,16 +6,25 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SimpleTextAdapter  extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> {
+public class SimpleTextAdapter  extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> implements ItemTouchHelperListener{
 
     private ArrayList<Contact> mData = null ;
+
+    @Override
+    public void onItemSwipe(int position) {
+        Contact that = mData.get(position);
+        mData.remove(position);
+        notifyItemRemoved(position);
+        MainActivity ma = (MainActivity) MainActivity.activity;
+        DBHelper mDBHelper = new DBHelper(ma);
+        mDBHelper.DeleteContact(that.id);
+    }
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스. 클릭 이벤트 적용
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,23 +45,6 @@ public class SimpleTextAdapter  extends RecyclerView.Adapter<SimpleTextAdapter.V
                     v.getContext().startActivity(intent);
                 }
             });
-            itemView.findViewById(R.id.delete).setOnClickListener(
-                    new Button.OnClickListener() {
-                        public void onClick(View v) {
-                            int position = getAdapterPosition();
-                            //mDBHelper.InsertContact("01000000000","Park","Doyun");
-                            //Intent intent = new Intent(v.getContext(), addContact.class);
-                            //intent.putExtra("dbHelper",mDBHelper);
-                            DBHelper mDBHelper = new DBHelper(v.getContext());
-                            int id = mData.get(position).id;
-                            mDBHelper.DeleteContact(id);
-                            mData.remove(position);
-                            notifyItemRemoved(position);
-                            //Log.v("click", "okay");
-
-                        }
-                    });
-
         }
     }
 

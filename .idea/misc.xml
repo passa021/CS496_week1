@@ -3,19 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/drawable/list_view.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/activity_add_contact.xml" value="0.1" />
-        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/activity_contact_info.xml" value="0.1" />
+        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/activity_contact_info.xml" value="0.18" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/activity_main.xml" value="0.17291666666666666" />
-        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/element1.xml" value="0.21" />
+        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/element1.xml" value="0.25" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_1.xml" value="0.18" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_2.xml" value="0.1716485507246377" />
-        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_3.xml" value="0.1" />
+        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_3.xml" value="0.33" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_3_list.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_todolist.xml" value="0.21" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/fragment_todolist_list.xml" value="0.21" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/imageview.xml" value="0.22" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/switch_item.xml" value="0.1" />
         <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/todoelement.xml" value="0.25" />
+        <entry key="..\:/Users/samsung/madcamp/CS496_week1/app/src/main/res/layout/toolbar.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23125" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.23125" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23125" />
