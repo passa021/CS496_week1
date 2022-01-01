@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Fragment3 extends Fragment {
+    private ItemTouchHelper mItemTouchHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +54,8 @@ public class Fragment3 extends Fragment {
         //TodoAdapter did_adapter = new TodoAdapter(didlist,true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView1.setAdapter(didnot_adapter);
+        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(didnot_adapter));
+        mItemTouchHelper.attachToRecyclerView(recyclerView1);
 
 
 

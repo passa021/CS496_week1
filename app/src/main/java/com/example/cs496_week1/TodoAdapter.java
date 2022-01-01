@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 
-public class TodoAdapter  extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
+public class TodoAdapter  extends RecyclerView.Adapter<TodoAdapter.ViewHolder> implements ItemTouchHelperListener{
 
     private ArrayList<Todolist> mData = null ;
     //private boolean is_did=true;
@@ -105,6 +105,12 @@ public class TodoAdapter  extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
         notifyItemChanged(getItemCount());
 
 
+    }
+
+    @Override
+    public void onItemSwipe(int position) {
+        mData.remove(position);
+        notifyItemRemoved(position);
     }
 
 }
