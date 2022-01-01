@@ -106,8 +106,6 @@ public class Fragment3 extends Fragment {
 
 
 
-
-
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         TextView textView = (TextView) rootView.findViewById(R.id.toolbartext);
         textView.setText("Todo List");
