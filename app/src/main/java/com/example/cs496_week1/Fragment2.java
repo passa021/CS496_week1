@@ -89,7 +89,7 @@ public class Fragment2 extends Fragment {
                 case R.id.gallery_camera:
 
 
-                    Toast.makeText(getActivity(),"camera", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),"camera", Toast.LENGTH_SHORT).show();
                     Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                     /*if(camera_intent.resolveActivity(getActivity().getPackageManager())!=null){
