@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="#CDC8C8C8"
+    android:background="@drawable/list_view"
     android:clickable="true"
     android:focusable="auto">
 

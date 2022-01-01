@@ -1,6 +1,8 @@
 package com.example.cs496_week1;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,28 @@ public class Fragment3 extends Fragment {
         mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(didnot_adapter));
         mItemTouchHelper.attachToRecyclerView(recyclerView1);
 
+        rootView.findViewById(R.id.context).setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Log.v("click","okay");
+                    EditText t_context = (EditText) getActivity().findViewById(R.id.context);
+                    String context = t_context.getText().toString();
+                    int id = mDBHelper.InsertTodo(context,0);
+                    ViewGroup subviewGroup = (ViewGroup) rootView.findViewById(R.id.todo_list);
+
+                    Todolist todolist = new Todolist();
+                    todolist.Setting(id,context,0);
+                    didnot_adapter.addItemfront(todolist);
+                    t_context.setText("");
+                    LayoutWrapContentUpdater.wrapContentAgain(subviewGroup);
+
+                    return true;
+                }
+                return false;
+
+            }
+        });
 
 
         rootView.findViewById(R.id.addbutton).setOnClickListener(
@@ -72,8 +96,6 @@ public class Fragment3 extends Fragment {
                         didnot_adapter.addItemfront(todolist);
                         t_context.setText("");
                         LayoutWrapContentUpdater.wrapContentAgain(subviewGroup);
-
-
                         //Log.v("click", "okay");
 
                     }
