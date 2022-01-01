@@ -46,6 +46,7 @@ public class SimpleTextAdapter  extends RecyclerView.Adapter<SimpleTextAdapter.V
                             DBHelper mDBHelper = new DBHelper(v.getContext());
                             int id = mData.get(position).id;
                             mDBHelper.DeleteContact(id);
+                            mData.remove(position);
                             notifyItemRemoved(position);
                             //Log.v("click", "okay");
 
