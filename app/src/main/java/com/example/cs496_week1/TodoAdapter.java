@@ -109,8 +109,12 @@ public class TodoAdapter  extends RecyclerView.Adapter<TodoAdapter.ViewHolder> i
 
     @Override
     public void onItemSwipe(int position) {
+        Todolist that = mData.get(position);
         mData.remove(position);
         notifyItemRemoved(position);
+        MainActivity ma = (MainActivity) MainActivity.activity;
+        DBHelper3 mDBHelper = new DBHelper3(ma);
+        mDBHelper.DeleteTodo(that.id);
     }
 
 }
