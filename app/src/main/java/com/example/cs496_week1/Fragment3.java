@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -104,8 +106,9 @@ public class Fragment3 extends Fragment {
 
 
 
-
-
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        TextView textView = (TextView) rootView.findViewById(R.id.toolbartext);
+        textView.setText("Todo List");
 
         return rootView;
     }
