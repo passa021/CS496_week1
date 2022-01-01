@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                     if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
                         getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
                     }
-                    if(getSupportFragmentManager().findFragmentByTag("frag3") !=null){
-                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("frag3")).commit();
+                    if(getSupportFragmentManager().findFragmentByTag("TODO") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("TODO")).commit();
                     }
                     //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
 
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
                     if(getSupportFragmentManager().findFragmentByTag("Contact") !=null){
                         getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
                     }
-                    if(getSupportFragmentManager().findFragmentByTag("frag3") !=null){
-                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("frag3")).commit();
+                    if(getSupportFragmentManager().findFragmentByTag("TODO") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("TODO")).commit();
                     }
 
                     //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
@@ -70,11 +70,11 @@ public class MainActivity extends AppCompatActivity {
                     //menu_text.setText("Gallery");
                     return true;
                     //break;
-                case R.id.navigation_frag3:
-                    if (getSupportFragmentManager().findFragmentByTag("frag3") != null) {
-                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                case R.id.navigation_TODO:
+                    if (getSupportFragmentManager().findFragmentByTag("TODO") != null) {
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("TODO")).commit();
                     } else {
-                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "frag3").commit();
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "TODO").commit();
                     }
                     //보이는거 처리
                     if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         //getSupportActionBar().setCustomView(R.layout.toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment2(), "Gallery");
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "TODO");
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1(), "Contact").commit();
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 

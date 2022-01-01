@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
@@ -23,6 +24,7 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -175,32 +177,8 @@ public class Fragment2 extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_2, container, false);
 
-
-        /*int[] imageIDs = new int[]{
-                R.drawable.image_01,
-                R.drawable.image_02,
-                R.drawable.image_03,
-                R.drawable.image_04,
-                R.drawable.image_05,
-                R.drawable.image_06,
-                R.drawable.image_07,
-                R.drawable.image_08,
-                R.drawable.image_09,
-                R.drawable.image_10,
-                R.drawable.image_11,
-                R.drawable.image_12,
-                R.drawable.image_13,
-                R.drawable.image_14,
-                R.drawable.image_15,
-                R.drawable.image_16,
-                R.drawable.image_17,
-                R.drawable.image_18,
-                R.drawable.image_19,
-                R.drawable.image_20,
-
-        };*/
-
         gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
+        gridViewImages.setSaveEnabled(true);
         //GridView gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
         //ImageAdapter imageAdapter = new ImageAdapter(getActivity(), imageIDs, null);
         //gridViewImages.setAdapter(imageAdapter);
@@ -217,79 +195,79 @@ public class Fragment2 extends Fragment {
         return rootView;
     }
 
-        private File createImageFile() throws IOException {
-            String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
-            String imageFileName = "test_" + timeStamp + "_";
-            File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+        String imageFileName = "test_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-            //File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/");
-            if (!storageDir.exists()) storageDir.mkdir();
+        //File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/");
+        if (!storageDir.exists()) storageDir.mkdir();
 
-            File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
-            return image;
-        }
-        private Uri getImageUri(Context context, Bitmap inImage) {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
-            return Uri.parse(path);
-        }
+        return image;
+    }
+    private Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == PICK_FROM_ALBUM) {
-                if (data == null) {
-                    Toast.makeText(getActivity(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (data.getClipData() == null) {//이미지 하나선
-                        Log.e("single choice: ", String.valueOf(data.getData()));
-                        Uri imageUri = data.getData();
-                        uriList.add(imageUri);
-
-                        imageAdapter = new ImageAdapter(uriList, getActivity());
-                        gridViewImages.setAdapter(imageAdapter);
-
-                    } else {
-                        ClipData clipData = data.getClipData();
-                        Log.e("clipData", String.valueOf(clipData.getItemCount()));
-
-                        if (clipData.getItemCount() > 10) {
-                            Toast.makeText(getActivity(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e(TAG, "multiple choice");
-
-                            for (int i = 0; i < clipData.getItemCount(); i++) {
-                                Uri imageUri = clipData.getItemAt(i).getUri();
-                                try {
-                                    uriList.add(imageUri);
-                                } catch (Exception e) {
-                                    Log.e(TAG, "File select error", e);
-                                }
-                            }
-                            imageAdapter = new ImageAdapter(uriList, getActivity());
-                            gridViewImages.setAdapter(imageAdapter);
-
-                        }
-                    }
-                }
-            } else{
-                if (data == null){
-                    Toast.makeText(getActivity(),"Canceled", Toast.LENGTH_SHORT).show();
-                }else {
-                    //Toast.makeText(getActivity(),"after on activity", Toast.LENGTH_SHORT).show();
-                    //Uri photoURI = data.getData();
-                    Bundle extras = data.getExtras();
-
-                    Uri photoURI = getImageUri(getActivity(), (Bitmap) extras.get("data"));
-
-                    uriList.add(photoURI);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FROM_ALBUM) {
+            if (data == null) {
+                Toast.makeText(getActivity(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                if (data.getClipData() == null) {//이미지 하나선
+                    Log.e("single choice: ", String.valueOf(data.getData()));
+                    Uri imageUri = data.getData();
+                    uriList.add(imageUri);
 
                     imageAdapter = new ImageAdapter(uriList, getActivity());
                     gridViewImages.setAdapter(imageAdapter);
+
+                } else {
+                    ClipData clipData = data.getClipData();
+                    Log.e("clipData", String.valueOf(clipData.getItemCount()));
+
+                    if (clipData.getItemCount() > 10) {
+                        Toast.makeText(getActivity(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e(TAG, "multiple choice");
+
+                        for (int i = 0; i < clipData.getItemCount(); i++) {
+                            Uri imageUri = clipData.getItemAt(i).getUri();
+                            try {
+                                uriList.add(imageUri);
+                            } catch (Exception e) {
+                                Log.e(TAG, "File select error", e);
+                            }
+                        }
+                        imageAdapter = new ImageAdapter(uriList, getActivity());
+                        gridViewImages.setAdapter(imageAdapter);
+
+                    }
                 }
             }
+        } else{
+            if (data == null){
+                Toast.makeText(getActivity(),"Canceled", Toast.LENGTH_SHORT).show();
+            }else {
+                //Toast.makeText(getActivity(),"after on activity", Toast.LENGTH_SHORT).show();
+                //Uri photoURI = data.getData();
+                Bundle extras = data.getExtras();
+
+                Uri photoURI = getImageUri(getActivity(), (Bitmap) extras.get("data"));
+
+                uriList.add(photoURI);
+
+                imageAdapter = new ImageAdapter(uriList, getActivity());
+                gridViewImages.setAdapter(imageAdapter);
+            }
+        }
 
         /*if (requestCode == PICK_FROM_ALBUM) {
             Uri photoUri = data.getData();
@@ -320,7 +298,7 @@ public class Fragment2 extends Fragment {
             //이미지 set
 
         }*/
-        }
+    }
     /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
@@ -364,4 +342,4 @@ public class Fragment2 extends Fragment {
     }*/
 
 
-    }
+}
