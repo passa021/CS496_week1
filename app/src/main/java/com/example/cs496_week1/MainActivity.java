@@ -1,8 +1,17 @@
 package com.example.cs496_week1;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,25 +23,68 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     public static MainActivity activity;
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            //TextView menu_text = (TextView)findViewById(R.id.toolbartext);
             switch (item.getItemId()) {
                 case R.id.navigation_contact:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
+                    if (getSupportFragmentManager().findFragmentByTag("Contact") != null) {
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    } else {
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1(), "Contact").commit();
+                    }
+                    //보이는거 처리
+                    if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
+                    }
+                    if(getSupportFragmentManager().findFragmentByTag("TODO") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("TODO")).commit();
+                    }
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment1()).commit();
 
+                    //menu_text.setText("Contact");
                     return true;
                     //break;
                 case R.id.navigation_gallery:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
+                    if (getSupportFragmentManager().findFragmentByTag("Gallery") != null){
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
+                    } else {
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment2(), "Gallery").commit();
+                    }
 
+                    if(getSupportFragmentManager().findFragmentByTag("Contact") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    }
+                    if(getSupportFragmentManager().findFragmentByTag("TODO") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("TODO")).commit();
+                    }
+
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment2()).commit();
+                    //Toolbar toolbar = findViewById(R.id.toolbar);
+                    //toolbar.inflateMenu(R.menu.gallery_menu);
+
+                    //menu_text.setText("Gallery");
                     return true;
                     //break;
-                case R.id.navigation_frag3:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment3()).commit();
-
+                case R.id.navigation_TODO:
+                    if (getSupportFragmentManager().findFragmentByTag("TODO") != null) {
+                        getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("TODO")).commit();
+                    } else {
+                        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "TODO").commit();
+                    }
+                    //보이는거 처리
+                    if(getSupportFragmentManager().findFragmentByTag("Gallery") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Gallery")).commit();
+                    }
+                    if(getSupportFragmentManager().findFragmentByTag("Contact") !=null){
+                        getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("Contact")).commit();
+                    }
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Fragment3()).commit();
+                    //menu_text.setText("frag3");
                     //break;
                     return true;
             }
@@ -45,13 +97,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = MainActivity.this;
         setContentView(R.layout.activity_main);
+
+
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //getSupportActionBar().setCustomView(R.layout.toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment2(), "Gallery");
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "TODO");
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1(), "Contact").commit();
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
-    //@Override
-
 
 }

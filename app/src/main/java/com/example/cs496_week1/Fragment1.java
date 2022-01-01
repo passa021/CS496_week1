@@ -60,9 +60,6 @@ public class Fragment1 extends Fragment {
         );
 
 
-
-
-
         SimpleTextAdapter adapter = new SimpleTextAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
