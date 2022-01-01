@@ -75,18 +75,6 @@ public class Fragment2 extends Fragment {
                 case R.id.gallery_import:
                     //Toast.makeText(getActivity(),"mafee", Toast.LENGTH_SHORT).show();
 
-                    PermissionListener permissionListener = new PermissionListener() {
-                        @Override
-                        public void onPermissionGranted() {
-                            //Toast.makeText(getActivity(), "권한 허가", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onPermissionDenied(ArrayList<String> arrayList) {
-                            Toast.makeText(getActivity(), "권한 거부", Toast.LENGTH_SHORT).show();
-                        }
-                    };
-                    TedPermission.with(getActivity()).setPermissionListener(permissionListener).setRationaleMessage(getResources().getString(R.string.permission_2)).setDeniedMessage(getResources().getString(R.string.permission_1)).setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA).check();
 
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
@@ -97,6 +85,8 @@ public class Fragment2 extends Fragment {
 
 
                 case R.id.gallery_camera:
+
+
                     Toast.makeText(getActivity(),"camera", Toast.LENGTH_SHORT).show();
                     Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -168,6 +158,19 @@ public class Fragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                //Toast.makeText(getActivity(), "권한 허가", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> arrayList) {
+                Toast.makeText(getActivity(), "권한 거부", Toast.LENGTH_SHORT).show();
+            }
+        };
+        TedPermission.with(getActivity()).setPermissionListener(permissionListener).setRationaleMessage(getResources().getString(R.string.permission_2)).setDeniedMessage(getResources().getString(R.string.permission_1)).setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA).check();
+
 
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_2, container, false);
@@ -272,16 +275,20 @@ public class Fragment2 extends Fragment {
                     }
                 }
             } else{
-                Toast.makeText(getActivity(),"after on activity", Toast.LENGTH_SHORT).show();
-                //Uri photoURI = data.getData();
-                Bundle extras = data.getExtras();
+                if (data == null){
+                    Toast.makeText(getActivity(),"Canceled", Toast.LENGTH_SHORT).show();
+                }else {
+                    //Toast.makeText(getActivity(),"after on activity", Toast.LENGTH_SHORT).show();
+                    //Uri photoURI = data.getData();
+                    Bundle extras = data.getExtras();
 
-                Uri photoURI = getImageUri(getActivity(), (Bitmap) extras.get("data"));
+                    Uri photoURI = getImageUri(getActivity(), (Bitmap) extras.get("data"));
 
-                uriList.add(photoURI);
+                    uriList.add(photoURI);
 
-                imageAdapter = new ImageAdapter(uriList, getActivity());
-                gridViewImages.setAdapter(imageAdapter);
+                    imageAdapter = new ImageAdapter(uriList, getActivity());
+                    gridViewImages.setAdapter(imageAdapter);
+                }
             }
 
         /*if (requestCode == PICK_FROM_ALBUM) {

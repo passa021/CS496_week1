@@ -17,15 +17,14 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#00FFFFFF"
+        android:choiceMode="multipleChoice"
         android:gravity="center"
         android:horizontalSpacing="5dp"
         android:numColumns="3"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="50dp"
-        android:verticalSpacing="5dp"
-        android:choiceMode="multipleChoice"/>
+        android:verticalSpacing="5dp" />
 
 
 </LinearLayout>
