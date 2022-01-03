@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
@@ -9,73 +9,84 @@
     tools:context=".Fragment3">
 
     <include
+        android:id="@+id/include"
         layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/todo_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="56dp"
+        tools:layout_conversion_absoluteWidth="411dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/context_todo"
-            android:layout_width="338dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/context_todo"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:foregroundTint="#3F51B5"
+        android:gravity="center_vertical"
+        android:minHeight="50dp"
+        app:boxStrokeColor="#3F51B5"
+        app:layout_constraintBottom_toTopOf="@+id/todo_list"
+        app:layout_constraintEnd_toStartOf="@+id/addbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        tools:layout_conversion_absoluteHeight="56dp"
+        tools:layout_conversion_absoluteWidth="338dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/context"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#3F51B5"
             android:foregroundTint="#3F51B5"
-            android:gravity="center_vertical"
-            android:minHeight="50dp"
-            app:boxStrokeColor="#3F51B5"
-            app:layout_constraintBottom_toTopOf="@+id/todo_list"
-            app:layout_constraintEnd_toStartOf="@+id/addbutton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView1">
+            android:gravity="clip_vertical"
+            android:hint="context"
+            android:singleLine="true"
+            android:textColorHighlight="#3F51B5"
+            android:textColorLink="#3F51B5"
+            tools:layout_conversion_absoluteHeight="45dp"
+            tools:layout_conversion_absoluteWidth="326dp"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="67dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/context"
-                android:layout_width="326dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:backgroundTint="#3F51B5"
-                android:foregroundTint="#3F51B5"
-                android:gravity="clip_vertical"
-                android:hint="context"
-                android:singleLine="true"
-                android:textColorHighlight="#3F51B5"
-                android:textColorLink="#3F51B5" />
-        </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/addbutton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:width="10dp"
+        android:height="10dp"
+        android:background="@drawable/ic_baseline_add_box_24"
+        android:gravity="center|center_horizontal"
+        android:onClick="hideKeyboard"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/todo_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_conversion_absoluteHeight="50dp"
+        tools:layout_conversion_absoluteWidth="50dp" />
 
-        <Button
-            android:id="@+id/addbutton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:width="10dp"
-            android:height="10dp"
-            android:background="@drawable/ic_baseline_add_box_24"
-            android:gravity="center|center_horizontal"
-            android:onClick="hideKeyboard"
-            android:text=""
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/todo_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/context_todo"
-            app:layout_constraintTop_toBottomOf="@+id/textView1"
-            app:layout_constraintVertical_bias="0.0" />
-
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todo_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        tools:layout_conversion_absoluteHeight="547dp"
+        tools:layout_conversion_absoluteWidth="402dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
