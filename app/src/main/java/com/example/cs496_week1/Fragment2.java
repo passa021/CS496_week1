@@ -206,13 +206,11 @@ public class Fragment2 extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_2, container, false);
 
-
-
-
         gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
         gridViewImages.setSaveEnabled(true);
         //GridView gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
         preferences = getActivity().getSharedPreferences("Uri", MODE_PRIVATE);
+
 
 
         getPreferences();
@@ -272,13 +270,14 @@ public class Fragment2 extends Fragment {
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
     private String PREFERENCE_LOG_FILE = "uri";
+    private JSONArray array = new JSONArray();
+    private SharedPreferences.Editor editor;
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        SharedPreferences.Editor editor = preferences.edit();
-        JSONArray array = new JSONArray();
+        editor = preferences.edit();
 
         if (requestCode == PICK_FROM_ALBUM) {
             if (data == null) {
@@ -289,9 +288,10 @@ public class Fragment2 extends Fragment {
                     Uri imageUri = data.getData();
                     uriList.add(imageUri);
 
-                    for(int i = 0; i<uriList.size(); i++){
+                    /*for(int i = 0; i<uriList.size(); i++){
                         array.put(uriList.get(i));
-                    }
+                    }*/
+                    array.put(imageUri);
 
                     editor.putString(PREFERENCE_LOG_FILE, array.toString());
                     editor.commit();
@@ -337,11 +337,12 @@ public class Fragment2 extends Fragment {
                 Uri photoURI = getImageUri(getActivity(), (Bitmap) extras.get("data"));
 
                 uriList.add(photoURI);
+                array.put(photoURI);
 
                 //JSONArray array = new JSONArray();
-                for(int i = 0; i<uriList.size(); i++){
+                /*for(int i = 0; i<uriList.size(); i++){
                     array.put(uriList.get(i));
-                }
+                }*/
 
                 editor.putString(PREFERENCE_LOG_FILE, array.toString());
                 editor.commit();
