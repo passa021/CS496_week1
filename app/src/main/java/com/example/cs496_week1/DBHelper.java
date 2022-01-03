@@ -35,12 +35,11 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
     }
 
     // UPDATE
-    /*public void  UpdateContact(String phone_number, String first_name, String last_name){
+    public void  UpdateContact(String phone_number, String first_name, String last_name, int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE Contact SET phone_number = '"+phone_number+"',first_name = '"+first_name+"', last_name = '"+last_name+  "'WHERE phone_number ='"+phone_number+"'");
+        db.execSQL("UPDATE Contact SET phone_number = '"+phone_number+"',first_name = '"+first_name+"', last_name = '"+last_name+  "'WHERE id ='"+id+"'");
 
     }
-     */
     // DELETE
     public void DeleteContact(int id){
         SQLiteDatabase db = getWritableDatabase();

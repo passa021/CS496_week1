@@ -40,7 +40,9 @@ public class SimpleTextAdapter  extends RecyclerView.Adapter<SimpleTextAdapter.V
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(),Contact_info.class);
-                    intent.putExtra("name", mData.get(position).getName());
+                    intent.putExtra("id", mData.get(position).id);
+                    intent.putExtra("first_name", mData.get(position).first_name);
+                    intent.putExtra("last_name", mData.get(position).last_name);
                     intent.putExtra("phone_number", mData.get(position).getPhone_number());
                     v.getContext().startActivity(intent);
                 }

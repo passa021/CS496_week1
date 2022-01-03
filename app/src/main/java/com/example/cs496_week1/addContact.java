@@ -36,8 +36,8 @@ public class addContact extends AppCompatActivity {
                         }else if (last_name.length()<=0){
                             Toast.makeText(getApplicationContext(), "last name을 입력하세요.", Toast.LENGTH_SHORT).show();
                             return;
-                        }else if (phone_number.length()<=0){
-                            Toast.makeText(getApplicationContext(), "phone number을 입력하세요.", Toast.LENGTH_SHORT).show();
+                        }else if (phone_number.length()<=9){
+                            Toast.makeText(getApplicationContext(), "phone number이 너무 짧습니다.", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
