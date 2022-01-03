@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,12 +21,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.core.content.FileProvider;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +45,8 @@ import android.widget.Toast;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
@@ -54,6 +60,9 @@ import java.util.Date;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+
+import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,6 +79,7 @@ public class Fragment2 extends Fragment {
     GridView gridViewImages;
     ImageAdapter imageAdapter;
 
+
     private Toolbar.OnMenuItemClickListener mOnMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
@@ -80,6 +90,9 @@ public class Fragment2 extends Fragment {
 
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                    intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, PICK_FROM_ALBUM);
@@ -89,8 +102,31 @@ public class Fragment2 extends Fragment {
                 case R.id.gallery_camera:
 
 
-                    //Toast.makeText(getActivity(),"camera", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"camera", Toast.LENGTH_SHORT).show();
                     Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    camera_intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    camera_intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    camera_intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+
+
+                    // @@@@@@@@@@@@@@@ added @@@@@@@@@@@@
+
+                    /*if(camera_intent.resolveActivity(getActivity().getPackageManager()) != null){
+                        File photoFile = null;
+                        try{
+                            photoFile = createImageFile();
+                        }catch(IOException ex){
+                            //Toast.makeText(getActivity(),"camedsawra", Toast.LENGTH_SHORT).show();
+                        }
+
+                        if (photoFile != null){
+                            Uri photoURI = FileProvider.getUriForFile(getActivity().getApplicationContext(),"com.example.cs496_week1.fileprovider",photoFile);
+                            camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                            startActivityForResult(camera_intent, PICK_FROM_CAMERA);
+                        }
+                    }*/
+
+                    ////////////////////////////////
 
                     /*if(camera_intent.resolveActivity(getActivity().getPackageManager())!=null){
                         File photoFile = null;
@@ -145,11 +181,14 @@ public class Fragment2 extends Fragment {
         return true;}
     };
 
+    private SharedPreferences preferences;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         PermissionListener permissionListener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
@@ -167,11 +206,18 @@ public class Fragment2 extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_2, container, false);
 
+
+
+
         gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
         gridViewImages.setSaveEnabled(true);
         //GridView gridViewImages = (GridView) rootView.findViewById(R.id.gridViewImages);
-        //ImageAdapter imageAdapter = new ImageAdapter(getActivity(), imageIDs, null);
-        //gridViewImages.setAdapter(imageAdapter);
+        preferences = getActivity().getSharedPreferences("Uri", MODE_PRIVATE);
+
+
+        getPreferences();
+        imageAdapter = new ImageAdapter(uriList,getActivity());
+        gridViewImages.setAdapter(imageAdapter);
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         TextView textView = (TextView) rootView.findViewById(R.id.toolbartext);
         textView.setText("Gallery");
@@ -185,15 +231,34 @@ public class Fragment2 extends Fragment {
         return rootView;
     }
 
+    private void getPreferences(){
+        String json = preferences.getString(PREFERENCE_LOG_FILE,null);
+        if(json !=null){
+            try{
+                JSONArray array = new JSONArray(json);
+                //uriList.clear();
+                for(int i = 0 ; i <array.length(); i++){
+                    String uri = array.optString(i);
+                    uriList.add(Uri.parse(uri));
+                }
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }else {
+
+        }
+    }
+
     private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
-        String imageFileName = "test_" + timeStamp + "_";
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         //File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/");
         if (!storageDir.exists()) storageDir.mkdir();
 
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        mCurrentPhotoPath = image.getAbsolutePath();
 
         return image;
     }
@@ -204,9 +269,17 @@ public class Fragment2 extends Fragment {
         return Uri.parse(path);
     }
 
+    String mCurrentPhotoPath;
+    static final int REQUEST_TAKE_PHOTO = 1;
+    private String PREFERENCE_LOG_FILE = "uri";
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        SharedPreferences.Editor editor = preferences.edit();
+        JSONArray array = new JSONArray();
+
         if (requestCode == PICK_FROM_ALBUM) {
             if (data == null) {
                 Toast.makeText(getActivity().getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
@@ -216,6 +289,12 @@ public class Fragment2 extends Fragment {
                     Uri imageUri = data.getData();
                     uriList.add(imageUri);
 
+                    for(int i = 0; i<uriList.size(); i++){
+                        array.put(uriList.get(i));
+                    }
+
+                    editor.putString(PREFERENCE_LOG_FILE, array.toString());
+                    editor.commit();
                     imageAdapter = new ImageAdapter(uriList, getActivity());
                     gridViewImages.setAdapter(imageAdapter);
 
@@ -232,6 +311,10 @@ public class Fragment2 extends Fragment {
                             Uri imageUri = clipData.getItemAt(i).getUri();
                             try {
                                 uriList.add(imageUri);
+                                //JSONArray array = new JSONArray();
+                                array.put(imageUri);
+                                editor.putString(PREFERENCE_LOG_FILE, array.toString());
+                                editor.commit();
                             } catch (Exception e) {
                                 Log.e(TAG, "File select error", e);
                             }
@@ -243,6 +326,7 @@ public class Fragment2 extends Fragment {
                 }
             }
         } else{
+
             if (data == null){
                 Toast.makeText(getActivity().getApplicationContext(),"Canceled", Toast.LENGTH_SHORT).show();
             }else {
@@ -254,9 +338,28 @@ public class Fragment2 extends Fragment {
 
                 uriList.add(photoURI);
 
+                //JSONArray array = new JSONArray();
+                for(int i = 0; i<uriList.size(); i++){
+                    array.put(uriList.get(i));
+                }
+
+                editor.putString(PREFERENCE_LOG_FILE, array.toString());
+                editor.commit();
+
                 imageAdapter = new ImageAdapter(uriList, getActivity());
                 gridViewImages.setAdapter(imageAdapter);
             }
+
+            /*if (resultCode == RESULT_OK) {
+                File file = new File(mCurrentPhotoPath);
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),Uri.fromFile(file));
+
+                Uri photoURI = Uri.fromFile(file);
+                uriList.add(photoURI);
+
+                imageAdapter = new ImageAdapter(uriList, getActivity());
+                gridViewImages.setAdapter(imageAdapter);
+            }*/
         }
 
         /*if (requestCode == PICK_FROM_ALBUM) {
