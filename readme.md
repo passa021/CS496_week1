@@ -24,7 +24,7 @@
 기능
 
 1. 연락처 저장  
-   -  연락처 
+   https://user-images.githubusercontent.com/81007362/147925036-2f42863b-8243-4a16-b63f-f228e3cf196b.gif
 2. 연락처 수정  
    연락처 수정에 대한 이야기
 3. 연락처 삭제  
