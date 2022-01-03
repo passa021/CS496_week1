@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public class ImageActivity extends Activity {
     Activity act = this;
 
@@ -39,7 +41,8 @@ public class ImageActivity extends Activity {
         //int imageID = (Integer)receivedIntent.getExtras().get("image ID");
         //imageView.setImageResource(imageID);
         if(imageURI != null) {
-            imageView.setImageURI(imageURI);
+            //imageView.setImageURI(imageURI);
+            Glide.with(getApplicationContext()).load(imageURI).into(imageView);
         }
     }
 

@@ -25,7 +25,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/context_todo"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:foregroundTint="#3F51B5"
         android:gravity="center_vertical"
         android:minHeight="50dp"
@@ -48,6 +50,7 @@
             android:singleLine="true"
             android:textColorHighlight="#3F51B5"
             android:textColorLink="#3F51B5"
+            android:textSize="16sp"
             tools:layout_conversion_absoluteHeight="45dp"
             tools:layout_conversion_absoluteWidth="326dp"
             tools:layout_editor_absoluteX="9dp"

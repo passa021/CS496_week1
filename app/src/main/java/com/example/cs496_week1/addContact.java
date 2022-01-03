@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,30 +24,36 @@ public class addContact extends AppCompatActivity {
         findViewById(R.id.save).setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v) {
-                        String phone_number = t_phone_number.getText().toString();
-                        String first_name = t_first_name.getText().toString();
-                        String last_name = t_last_name.getText().toString();
+                        String phone_number = t_phone_number.getText().toString().trim();
+                        String first_name = t_first_name.getText().toString().trim();
+                        String last_name = t_last_name.getText().toString().trim();
+
                         Log.v("check1",phone_number+first_name+last_name);
-                        //mDBHelper.InsertContact(phone_number,first_name,last_name);
+                        if (first_name.length()<=0){
+                            Toast.makeText(getApplicationContext(), "first name을 입력하세요.", Toast.LENGTH_SHORT).show();
+                            return;
+
+                        }else if (last_name.length()<=0){
+                            Toast.makeText(getApplicationContext(), "last name을 입력하세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }else if (phone_number.length()<=0){
+                            Toast.makeText(getApplicationContext(), "phone number을 입력하세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+
                         MainActivity ma = (MainActivity) MainActivity.activity;
                         DBHelper mDBHelper = new DBHelper(ma);
-                        //ma.onCreate();
                         mDBHelper.InsertContact(phone_number,first_name,last_name);
                         ma.finish();
-                        //ma.recreate();
-                        //ma.startActivity(getIntent());
                         Intent new_intent = new Intent(v.getContext(), MainActivity.class);
                         startActivity(new_intent);
-
-                        //finish();
-                        //addContact.super.onBackPressed();
                     }
                 }
         );
         findViewById(R.id.cancel).setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v) {
-                        //addContact.super.onBackPressed();
                         finish();
                     }
                 }

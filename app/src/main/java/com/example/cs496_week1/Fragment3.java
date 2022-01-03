@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -65,10 +66,13 @@ public class Fragment3 extends Fragment {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Log.v("click","okay");
                     EditText t_context = (EditText) getActivity().findViewById(R.id.context);
-                    String context = t_context.getText().toString();
-                    int id = mDBHelper.InsertTodo(context,0);
+                    String context = t_context.getText().toString().trim();
+                    if (context.length()<=0) {
+                        Toast.makeText(getActivity().getApplicationContext(), "todo를 입력하세요.", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                        int id = mDBHelper.InsertTodo(context,0);
                     ViewGroup subviewGroup = (ViewGroup) rootView.findViewById(R.id.todo_list);
 
                     Todolist todolist = new Todolist();
@@ -89,7 +93,11 @@ public class Fragment3 extends Fragment {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         EditText t_context = (EditText) getActivity().findViewById(R.id.context);
-                        String context = t_context.getText().toString();
+                        String context = t_context.getText().toString().trim();
+                        if (context.length()<=0) {
+                            Toast.makeText(getActivity().getApplicationContext(), "todo를 입력하세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         int id = mDBHelper.InsertTodo(context,0);
                         ViewGroup subviewGroup = (ViewGroup) rootView.findViewById(R.id.todo_list);
 

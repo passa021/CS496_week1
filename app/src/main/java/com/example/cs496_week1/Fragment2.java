@@ -145,16 +145,6 @@ public class Fragment2 extends Fragment {
         return true;}
     };
 
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == 9001){//camera
-                Toast.makeText(getActivity(),"mafee", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    });
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -219,7 +209,7 @@ public class Fragment2 extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FROM_ALBUM) {
             if (data == null) {
-                Toast.makeText(getActivity(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
             } else {
                 if (data.getClipData() == null) {//이미지 하나선
                     Log.e("single choice: ", String.valueOf(data.getData()));
@@ -234,7 +224,7 @@ public class Fragment2 extends Fragment {
                     Log.e("clipData", String.valueOf(clipData.getItemCount()));
 
                     if (clipData.getItemCount() > 10) {
-                        Toast.makeText(getActivity(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.e(TAG, "multiple choice");
 
@@ -254,7 +244,7 @@ public class Fragment2 extends Fragment {
             }
         } else{
             if (data == null){
-                Toast.makeText(getActivity(),"Canceled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(),"Canceled", Toast.LENGTH_SHORT).show();
             }else {
                 //Toast.makeText(getActivity(),"after on activity", Toast.LENGTH_SHORT).show();
                 //Uri photoURI = data.getData();

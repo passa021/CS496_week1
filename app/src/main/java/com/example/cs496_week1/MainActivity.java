@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment3(), "TODO");
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new Fragment1(), "Contact").commit();
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        Toast.makeText(getApplicationContext(), "swipe를 통해 목록을 지울 수 있습니다.", Toast.LENGTH_SHORT).show();
 
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
