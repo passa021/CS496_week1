@@ -24,11 +24,11 @@
 기능
 
 1. 연락처 저장  
-   https://user-images.githubusercontent.com/81007362/147925036-2f42863b-8243-4a16-b63f-f228e3cf196b.gif
+   ![add_contact](https://user-images.githubusercontent.com/81007362/147925036-2f42863b-8243-4a16-b63f-f228e3cf196b.gif)
 2. 연락처 수정  
-   연락처 수정에 대한 이야기
+   ![edit_contact](https://user-images.githubusercontent.com/81007362/147925145-7988d84b-d918-42c2-81d2-d7bdaf16629f.gif)
 3. 연락처 삭제  
-   연락처 삭제에 대한 이야기
+   ![remove_contact](https://user-images.githubusercontent.com/81007362/147925228-6778317c-f695-4929-9862-d3a6d0ec638e.gif)
    
 
 #
@@ -52,6 +52,8 @@
 기능
 
 1. tood list 추가  
-   todo list 추가에 대한 이야기
+   ![add_todo](https://user-images.githubusercontent.com/81007362/147925094-4ce9ca23-2501-426d-8ba5-5fe9e509f70c.gif)
 2. todo list 제거  
+   ![remove_todo](https://user-images.githubusercontent.com/81007362/147925255-8c096c62-139d-40b9-9735-95ee152c2e10.gif)
 3. todo list 위치 변경  
+   ![replace_todo](https://user-images.githubusercontent.com/81007362/147925260-aeeabf1a-6010-43d8-99ac-b929dfb1b904.gif)
