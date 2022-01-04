@@ -6,9 +6,8 @@
 이번 프로젝트에서 저희는 연락처, 갤러리, todo list를 구현하였습니다. 
 #
 ## PART 0. 개발환경
-Android Studio: 
-SDK: 26
-
+minSdkVersion: 26  
+targetSdkVersion: 30  
 #
 ## PART 1. 연락처
 recyclerview를 이용하여 연락처를 일렬로 배치하였습니다. 그리고 각각의 이름을 클릭하면 이름과 전화번호를 볼 수 있으며, 이를 수정할 수도 있게 하였습니다. SQL을 사용하여 임시로 DB를 구현하여 연락처와 이름에 대한 정보를 저장하고, 수정하는 기능을 구현하였습니다. 유연한 삭제를 위해 스와이프 동작을 구현하였으며, 코드는 다음 사이트에서 가져왔습니다. (https://stickode.tistory.com/268)
