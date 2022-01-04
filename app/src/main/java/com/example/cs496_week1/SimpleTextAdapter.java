@@ -1,13 +1,18 @@
 package com.example.cs496_week1;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -59,7 +64,7 @@ public class SimpleTextAdapter  extends RecyclerView.Adapter<SimpleTextAdapter.V
                         ActivityCompat.requestPermissions(ma, new String[]{Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_CALL_PHONE);
                         //권한을 허용하지 않는 경우
                     } else {
-                        //권한을 허용한 경우
+                        //권한을 허용한 경우a
                         try {
                             view.getContext().startActivity(tt);
                         } catch (SecurityException e) {
