@@ -3,28 +3,15 @@
 고려대 컴퓨터공학과 김민채, 카이스트 전산학부 박도윤
 #
 ## Abstraction
-이번 프로젝트에서 저희는 연락처, 갤러리, todo list를 구현하였습니다. 이 때, 연락처, todo list에서는 SQL를 활용하여 임시 DB를 제작하여 데이터를 저장, 수정, 삭제하는 것을 구현하였습니다. 갤러리에서는 ()
+이번 프로젝트에서 저희는 연락처, 갤러리, todo list를 구현하였습니다. 
 #
 ## PART 1. 연락처
-파일
-
-1. 실행 파일  
-   addContact.java: 연락처를 저장하는 기능 구현  
-   Contact_info.java: 연락처의 게부정보를 띄우고, 수정하기 위한 기능 구현  
-   Fragment1.java: 연락처의 메인 화면에 대한 구성
-   SimpleTextAdapter.java: 연락처의 메인 화면 속 각각의 연락처에 대한 기능 구현, 연락처 삭제에 대한 기능 구현
-
-2. 부가 파일
-   Contact.java: 연락처 정보를 담는 object
-   DBHelper.java: 연락처 정보를 DB에 담기 위해 도움을 주는 Class  
-   ItemTouchHelperListener.java: 아이템을 스와이프을 통해 삭제할 수 있도록 해주는 인터페이스  
-   ItemTouchHelperCallback.java: 아이템을 스와이프을 통해 삭제할 수 있도록 해주는 기능 구현 (https://stickode.tistory.com/268 참조)  
-   
-   
+recyclerview를 이용하여 연락처를 일렬로 배치하였습니다. 그리고 각각의 이름을 클릭하면 이름과 전화번호를 볼 수 있으며, 이를 수정할 수도 있게 하였습니다. SQL을 사용하여 임시로 DB를 구현하여 연락처와 이름에 대한 정보를 저장하고, 수정하는 기능을 구현하였습니다. 유연한 삭제를 위해 스와이프 동작을 구현하였으며, 코드는 다음 사이트에서 가져왔습니다. (https://stickode.tistory.com/268)
 기능
 
 1. 연락처 저장  
    ![add_contact](https://user-images.githubusercontent.com/81007362/147925036-2f42863b-8243-4a16-b63f-f228e3cf196b.gif)
+   
 2. 연락처 수정  
    ![edit_contact](https://user-images.githubusercontent.com/81007362/147925145-7988d84b-d918-42c2-81d2-d7bdaf16629f.gif)
 3. 연락처 삭제  
@@ -36,18 +23,7 @@
 
 #
 ## PART 3. To Do List 
-파일
-1. 실행 파일  
-   Fragment3.java: todolist의 메인 화면 구성 및 todolist 추가 기능  
-   TodoAdapter.java: todolist의 메인 화면 속 각각의 todolist에 대한 기능 구현, todolist 삭제에 대한 기능 구현
-   
-2. 부가 파일  
-   Todolist.java: todolist 정보를 담는 object
-   DBHelper3.java: todolist 정보를 DB에 담기 위해 도움을 주는 Class  
-   temTouchHelperListener.java: 아이템을 스와이프을 통해 삭제할 수 있도록 해주는 인터페이스  
-   ItemTouchHelperCallback.java: 아이템을 스와이프을 통해 삭제할 수 있도록 해주는 기능 구현 (https://stickode.tistory.com/268 참조)  
-   
-
+recyclerview를 이용하여 연락처를 일렬로 배치하였습니다. 추가된 todolist가 즉시 반영되고, 삭제될 수 있도록 하였으며, todolist를 체크할 시, 하단으로 내려가도록 하여 달성하지 못한 목표가 상단에 배치되도록 하였습니다.
 
 기능
 
